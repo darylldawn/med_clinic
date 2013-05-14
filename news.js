@@ -17,11 +17,11 @@ function start() {
     uname=prompt("Please enter your username:","")
     pword=prompt("Please enter your password:","")
     if(uname=="medicard" && pword=="m0b33l1ty")
-    getClinics();
+    getNews();
     else
     {
        alert("Username or password is invalid");
-       document.location = "http://66.175.220.37/medicard/mcard/admin/clinics.html";
+       document.location = "http://66.175.220.37/medicard/mcard/admin/news.html";
     }
     
     $( "#dialog-form-add" ).dialog({
@@ -167,7 +167,7 @@ function add(){
 
 }
 
-function getClinics(){
+function getNews(){
     var events = '';
     //alert("Getting news");
     var myNode = document.getElementById("top");
@@ -191,7 +191,7 @@ function getClinics(){
             $.each(obj.cont, function(i, cont)
             {
                 //alert(cont.news_id);
-                events += "<h3>Name: " + cont.name + " | : " + cont.news_id + " | Title: " + cont.title + "</h3><div> Body: " + cont.body + "<br> <img src='http://66.175.220.37/medicard/mcard/images/" + cont.image + "'/><br><ul id='icons' class='ui-widget ui-helper-clearfix'><li class='ui-state-default ui-corner-all' title='edit'><span class='ui-icon ui-icon-pencil' onclick='edit("+cont.news_id+")')></span></li></ul></div>";
+                events += "<h3>Date: " + cont.date + " | News ID: " + cont.news_id + " | Title: " + cont.title + "</h3><div> Body: " + cont.body + "<br> <img src='http://66.175.220.37/medicard/mcard/images/" + cont.image + "'/><br><ul id='icons' class='ui-widget ui-helper-clearfix'><li class='ui-state-default ui-corner-all' title='edit'><span class='ui-icon ui-icon-pencil' onclick='edit("+cont.news_id+")')></span></li></ul></div>";
                 
                 
             });
