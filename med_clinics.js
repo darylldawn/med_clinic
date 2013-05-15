@@ -4,7 +4,8 @@ var apptID;
 var year, day, month, clinicID, uname, pword;
 var id, uname, pword;
 window.onload = function() {
-	start();
+	//start();
+	forms();
 }
 function start() {
 	//alert("Submitted");
@@ -21,7 +22,10 @@ function start() {
 		alert("Username or password is invalid");
 		document.location = "http://66.175.220.37/medicard/mcard/admin/clinics.html";
 	}
+}
 
+function forms() {
+	getClinics();
 	$("#dialog-form-add").dialog({
 		autoOpen : false,
 		height : 300,
@@ -30,20 +34,6 @@ function start() {
 		buttons : {
 			"Submit" : function() {
 				$('#addClinicsForm').submit();
-
-				/*var val = 0;
-				 var x=document.getElementById("statSelect").selectedIndex;
-				 val = document.getElementsByTagName("option")[x].value;
-				 var ufile = document.getElementById('userfile').value;
-				 if(val=='') val = 0;
-				 //alert('appointment id:' + apptID);
-				 //alert('status:'+ val);
-				 //alert('remarks:'+ remarks);
-				 //alert('year:'+ year);
-				 //alert('month:'+ month);
-				 //alert('day:'+day);
-
-				 */
 				$(this).dialog("close");
 				var myNode = document.getElementById("top");
 				myNode.innerHTML = '';
@@ -59,47 +49,14 @@ function start() {
 
 		}
 	});
-	$("#dialog-form").dialog({
+	$("#dialog-form-edit").dialog({
 		autoOpen : false,
 		height : 300,
 		width : 300,
 		modal : true,
 		buttons : {
 			"Submit" : function() {
-				$('#clinicsForm').submit();
-
-				/*var val = 0;
-				 var x=document.getElementById("statSelect").selectedIndex;
-				 val = document.getElementsByTagName("option")[x].value;
-				 var ufile = document.getElementById('userfile').value;
-				 if(val=='') val = 0;
-				 //alert('appointment id:' + apptID);
-				 //alert('status:'+ val);
-				 //alert('remarks:'+ remarks);
-				 //alert('year:'+ year);
-				 //alert('month:'+ month);
-				 //alert('day:'+day);
-				 $.ajax(
-				 {
-				 url:            'http://66.175.220.37/medicard/mcard/admin/upload.php?file' + ufile,
-				 type:           'POST',
-				 async:          true,
-				 data:           null,
-				 crossDomain: true,
-
-				 contentType:    "application/x-www-form-urlencoded; application/json",
-				 success: function(json)
-				 {
-				 alert(json);
-
-				 },
-				 error: function(err)
-				 {
-				 alert("news update failed");
-
-				 }
-				 }, 'jsonp');
-				 */
+				$('#editClinicsForm').submit();
 				$(this).dialog("close");
 				var myNode = document.getElementById("top");
 				myNode.innerHTML = '';
@@ -115,40 +72,56 @@ function start() {
 
 		}
 	});
+	$("#dialog-form-delete").dialog({
+		autoOpen : false,
+		height : 150,
+		width : 300,
+		modal : true,
+		buttons : {
+			"Submit" : function() {
+				$('#deleteClinicsForm').submit();
+				$(this).dialog("close");
+				var myNode = document.getElementById("top");
+				myNode.innerHTML = '';
+				getClinics();
+			},
 
-	//getNews();
+			Cancel : function() {
+				$(this).dialog("close");
+			}
+		},
+		close : function() {
 
-	//alert("Hello");
-	//uname=prompt("Enter your username", "");
-	//pword=prompt("Enter your password", "");
-	//login();
-	//alert(clinicID);
-	//alert("Hello");
-
-	//alert(currentDate.getFullYear());
-
-	//getAllAppointments();
-
-	//setInterval(function(){getNews()},3000);
-
+		}
+	});
 }
 
-function edit(name) {
+function editClinic(clinic_id, priority, longitude, latitude) {
 	//alert(sched.toString() + " " + dat);
-	oFormObject = document.forms['clinicsForm'];
-	oFormObject.elements["clinic_id"].value = name;
+	oFormObject = document.forms['editClinicsForm'];
+	oFormObject.elements["clinic_id"].value = clinic_id;
+	oFormObject.elements["priority"].value = priority;
+	//oFormObject.elements["landline"].value = landline;
+	oFormObject.elements["longitude"].value = longitude;
+	oFormObject.elements["latitude"].value = latitude;
 	//oFormObject.elements["name"].value = name;
 	//apptID=id;
 	//alert(id);
-	$("#dialog-form").dialog("open");
+	$("#dialog-form-edit").dialog("open");
 	//
 
 }
 
-function add() {
+function addClinic() {
 	//alert(sched.toString() + " " + dat);
 	$("#dialog-form-add").dialog("open");
 	//apptID=id;
+}
+
+function deleteClinic(clinic_id) {
+	oFormObject = document.forms['deleteClinicsForm'];
+	oFormObject.elements["clinic_id"].value = clinic_id;
+	$("#dialog-form-delete").dialog("open");
 
 }
 
@@ -158,7 +131,7 @@ function getClinics() {
 	var myNode = document.getElementById("top");
 
 	$.ajax({
-		url : 'http://66.175.220.37/medicard/mcard/admin/med_getClinics.php', //+ encodeURI(qsParm['key']),
+		url : 'http://66.175.220.37/medicard/mcard/admin/med_getClinics.php',
 		type : 'GET',
 		async : true,
 		data : null,
@@ -173,8 +146,7 @@ function getClinics() {
 			//alert(obj);
 			$.each(obj.cont, function(i, cont) {
 				//alert(cont.news_id);
-				events += "<h3>Clinic ID: " + cont.clinic_id + " | Clinic Name: " + cont.name + "</h3><div>Name: " + cont.name + "<br>Priority: " + cont.priority + "<br>Clinic Hours: " + cont.clinicHours + "<br>Latitude: " + cont.latitude + "<br>Longitude: " + cont.longitude + "<br>Landline: " + cont.landline + "<br>Address: " + cont.city + "<br><ul id='icons' class='ui-widget ui-helper-clearfix'><li class='ui-state-default ui-corner-all' title='edit'><span class='ui-icon ui-icon-pencil' onclick='edit("\" + cont.name + \"")'></span></li></ul></div>";
-
+				events += "<h3>Clinic ID: " + cont.clinic_id + " | Clinic Name: " + cont.name + "</h3><div>Name: " + cont.name + "<br>Priority: " + cont.priority + "<br>Clinic Hours: " + cont.clinicHours + "<br>Latitude: " + cont.latitude + "<br>Longitude: " + cont.longitude + "<br>Landline: " + cont.landline + "<br>Address: " + cont.city + "<br><ul id='icons' class='ui-widget ui-helper-clearfix'><li class='ui-state-default ui-corner-all' title='Edit'><span class='ui-icon ui-icon-pencil' onclick='editClinic(" + cont.clinic_id + "," + cont.priority + "," + cont.longitude + "," + cont.latitude + ")'></span></li><li class='ui-state-default ui-corner-all' title='Delete'><span class='ui-icon ui-icon-trash' onclick='deleteClinic(" + cont.clinic_id + ")'></span></li></ul></div>";
 			});
 
 			document.getElementById("top").innerHTML = "<div id='accordion'>" + events + "</div>";

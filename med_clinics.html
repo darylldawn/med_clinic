@@ -6,7 +6,7 @@
 		<link href="css/start/jquery-ui-1.10.2.custom.css" rel="stylesheet">
 		<script src="js/jquery-1.9.1.js"></script>
 		<script src="js/jquery-ui-1.10.2.custom.js"></script>
-		<script src ="med_clinics.js"></script>
+		<script src ="play.js"></script>
 		<style>
 			body {
 				font: 60% "Trebuchet MS", sans-serif;
@@ -59,15 +59,14 @@
 		<h1 class="demoHeaders" align="left" id="clinicTitle">MEDICARD Add Clinic</h2>
 		<div id="cl" align="left">
 			<ul id="icons" class="ui-widget ui-helper-clearfix">
-				<li class="ui-state-default ui-corner-all" title="add news">
-					<span class="ui-icon ui-icon-power" onclick="add()"></span>
+				<li class="ui-state-default ui-corner-all" title="Add Clinic">
+					<span class="ui-icon ui-icon-plusthick" onclick="addClinic()"></span>
 				</li>
 			</ul>
-		</div><h2 class="demoHeaders" align="center"></h2><div id="datepicker" align="center"></div><!-- Accordion --><h2 class="demoHeaders" >Clinic</h2><h2 class="demoHeaders1" id="top"></h2>
-		<div id="dialog-form" title="Edit Clinic">
+		</div><h2 class="demoHeaders" align="center"></h2><div id="datepicker" align="center"></div><!-- Accordion --><h2 class="demoHeaders" >Clinic</h2><h2 class="demoHeaders1" id="top"></h2><!-- Edit -->
+		<div id="dialog-form-edit" title="Edit Clinic">
 			<p class="validateTips"></p>
-
-			<form enctype="multipart/form-data" action="med_editClinics.php" method="post" id="clinicsForm">
+			<form enctype="multipart/form-data" action="med_editClinics.php" method="post" id="editClinicsForm">
 				<fieldset>
 					<label for="clinic_id">Clinic ID</label>
 					<br>
@@ -93,7 +92,7 @@
 					<br>
 					<input type="" name="longitude" class="text ui-widget-content ui-corner-all" />
 					<br>
-					<label for="landlinde">Landlide</label>
+					<label for="landline">Landline</label>
 					<br>
 					<input type="" name="landline" class="text ui-widget-content ui-corner-all" />
 					<br>
@@ -103,10 +102,16 @@
 					<br>
 
 			</form>
-		</div>
+		</div><!-- Delete -->
+		<div id="dialog-form-delete" title="Delete Clinic">
+			<p class="validateTips"></p>
+			<form enctype="multipart/form-data" action="med_deleteClinics.php" method="post" id="deleteClinicsForm">
+				<fieldset>
+					<label for="clinic_id">Are you sure you want to delete <input type="" name="clinic_id" class="text ui-widget-content ui-corner-all" readonly="readonly"/>?</label>
+			</form>
+		</div><!-- Add -->
 		<div id="dialog-form-add" title="Add Clinic">
 			<p class="validateTips"></p>
-
 			<form enctype="multipart/form-data" action="med_insertClinics.php" method="post" id="addClinicsForm">
 				<fieldset>
 					<label for="name">Name</label>
@@ -129,7 +134,7 @@
 					<br>
 					<input type="" name="longitude" class="text ui-widget-content ui-corner-all" />
 					<br>
-					<label for="landlinde">Landlide</label>
+					<label for="landline">Landline</label>
 					<br>
 					<input type="" name="landline" class="text ui-widget-content ui-corner-all" />
 					<br>
